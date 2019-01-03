@@ -21,5 +21,11 @@ set showtabline=2
 " automatically indent braces etc. in C-like languages
 set smartindent
 
+" By default, use the + register for yanking and pasting
+" (requires that vim is compiled with clipboard support -> gvim)
+" this way, you can simply use yy to yank a line to clipboard
+" instead of "+yy
+set clipboard=unnamedplus
+
 " include packages in ~/.vim/bundles through pathogen
 execute pathogen#infect()
