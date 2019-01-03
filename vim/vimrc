@@ -1,0 +1,25 @@
+" press jk when in insert mode to leave insert mode 
+inoremap jk <esc>:w<cr>
+
+" press f5 to compile the program
+noremap <F5> <esc>:w<cr>:!python %<cr>
+" noremap <F6> <esc>:w<cr>:!make debug<cr>
+
+" change tabs with ctrl (strg) and j (left tab) or k (right tab)
+noremap <C-h> <esc>:tabp<cr>
+noremap <C-l> <esc>:tabn<cr>
+
+" display line numbers
+set number
+" use syntax highlighting
+syntax on
+
+" tabs should appear to be 4 spaces wide
+set tabstop=4 shiftwidth=4 noexpandtab
+" always show the tabline
+set showtabline=2
+" automatically indent braces etc. in C-like languages
+set smartindent
+
+" include packages in ~/.vim/bundles through pathogen
+execute pathogen#infect()

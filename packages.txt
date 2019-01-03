@@ -1,0 +1,4 @@
+# gvim can also be run in the terminal, but it has the advantage over vim
+# that it supports the X clipboard
+# Example: "+yy yanks a line to the X clipboard (the + is the clipboard register)
+gvim
