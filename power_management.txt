@@ -1,0 +1,20 @@
+# Power management setup
+
+I want my system to suspend-then-hibernate whenever
+I close the lid.
+
+## /etc/systemd/logind.conf
+
+Set `HandleLidSwitch=suspend-then-hibernate`.
+Restart systemd-logind.service.
+See https://wiki.archlinux.org/index.php/Power_management#Suspend_and_hibernate
+
+Configure the sleep timeout by adapting the HibernateDelaySec.
+See `man systemd-sleep.conf`.
+Place the file `/etc/systemd/sleep.conf`
+
+## i3lock & xss-lock
+
+xss-lock -- i3lock -n -i ~/projects/config/xp.png -p win -u &
+
+

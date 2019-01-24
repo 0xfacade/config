@@ -1,18 +1,48 @@
+" Credit to https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+source /home/ocius/projects/config/vim/vim-sensible
+set laststatus=0
+
 " press jk when in insert mode to leave insert mode 
 inoremap jk <esc>:w<cr>
 
-" press f5 to compile the program
-noremap <F5> <esc>:w<cr>:!python %<cr>
-" noremap <F6> <esc>:w<cr>:!make debug<cr>
+let g:browser_exists = 0
+function OpenBrowser()
+	if !exists("t:tab_has_browser")
+		let t:tab_has_browser = 0
+	endif
+
+	if !g:browser_exists
+		let g:browser_exists = 1
+		let t:tab_has_browser = 1
+		NERDTree
+	elseif !t:tab_has_browser
+		let t:tab_has_browser = 1
+		NERDTreeMirror
+	else
+		NERDTreeToggle
+	endif	
+endfunction
+
+function SetupPSI()
+	set syntax=python
+	" --dp: improves discrete inference (incompatible with contin. inference)
+	" --expectation: outputs expectation of the random variable
+	" --plot: visualizes the resulting distribution
+	
+	noremap <F5> <esc>:w<cr>:!psisolver % --expectation<cr>
+	" noremap <F5> <esc>:w<cr>:!psisolver % --plot<cr>
+endfunction
+autocmd BufNewFile,BufRead *.psi call SetupPSI()
+
+map <Leader>nt :NERDTreeTabsToggle<cr>
+"map <Leader>nt :NERDTreeFocusToggle<cr>
 
 " change tabs with ctrl (strg) and j (left tab) or k (right tab)
 noremap <C-h> <esc>:tabp<cr>
 noremap <C-l> <esc>:tabn<cr>
 
 " display line numbers
-set number
-" use syntax highlighting
-syntax on
+set number relativenumber
 
 " tabs should appear to be 4 spaces wide
 set tabstop=4 shiftwidth=4 noexpandtab
@@ -26,6 +56,8 @@ set smartindent
 " this way, you can simply use yy to yank a line to clipboard
 " instead of "+yy
 set clipboard=unnamedplus
+
+set nowrap
 
 " include packages in ~/.vim/bundles through pathogen
 execute pathogen#infect()
